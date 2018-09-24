@@ -5,14 +5,16 @@ ARG app_name
 ENV APP $app_name
 ENV conf $app_path/conf
 
-COPY package*.json ./
+WORKDIR $app_path
+
+COPY package*.json $app_path/
+
 RUN npm install
 
 RUN mkdir -p /log $app_path/upload
 
-COPY . .
+COPY . $app_path/.
 
-WORKDIR $app_path
 
 EXPOSE 8081
 
