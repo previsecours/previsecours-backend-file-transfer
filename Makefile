@@ -11,8 +11,10 @@ export APP=previsecours
 export COMPOSE_PROJECT_NAME=${APP}
 export APP_PATH := $(shell pwd)
 export BACKEND=${APP_PATH}/backend
+export BACKEND_UPLOAD_FOLDER=/upload
 export DC_DIR=${APP_PATH}
 export DC_PREFIX=${DC_DIR}/docker-compose
+export debugMode=false
 
 date                := $(shell date -I)
 id                  := $(shell cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
