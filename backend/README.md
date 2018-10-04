@@ -1,4 +1,4 @@
-# Minimalist Starter kit for **NodeJS** API, with Free MongoDB Hosting
+# Previsecours backend file transfer API to allow Automatic data Updates  
 
 ### Prerequisite:
 1. You need to have docker installed  
