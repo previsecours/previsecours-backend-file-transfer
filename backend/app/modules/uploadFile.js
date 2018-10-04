@@ -37,13 +37,14 @@ const partHandler = config => part => {
   }
 }
 
+let progress;
 
-const formClosedHandler = res => () => jsonResponse(200,{status:"Ok"})(res)
-const formErrordHandler = res => () => jsonResponse(400,{status:"Error",progress:progress})(res)
+const formClosedHandler = res => () => jsonResponse(200,{status:"Good",detail:"File was "+progress+"% uploaded"})(res)
+const formErrordHandler = res => () => jsonResponse(400,{status:"Error",detail:"File uploading encounterd an error at "+progress+"%"})(res)
 const formProgressHandler = res => (bytesReceived, bytesExpected) => progress = Math.round(bytesReceived / bytesExpected * 100);
 
 const uploadFile = (req, res, config) => {
-  let progress = 0
+  progress = 0
   var form = new multiparty.Form()
   form.on('part' , partHandler(config) )
   form.on('close', formClosedHandler(res) )

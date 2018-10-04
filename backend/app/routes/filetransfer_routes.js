@@ -2,14 +2,27 @@ const uploadFile = require('../modules/uploadFile.js')
 const jsonResponse = require('./jsonResponse.js')
 
 module.exports = function(app) {
-  // first route, a simple GET
+  // first route, a simple GET to know it the server is ON
   app.get('/api/status', (req, res) => {
     console.log('server side log through docker');
-    res.send('connected to the server (served through docker)')
+    jsonResponse(200,{status:"Good",detail: 'Connected to the server (served through docker)'})(res)
+  });
+  // second route, a simple GET to know it the accessToken works
+  app.get('/api/AuthentificationStatus', (req, res) => {
+    const accessToken = req.headers['x-access-token'] || false;
+    if (accessToken !== process.env.accessToken) {
+      jsonResponse(400,{status:"Error",detail: 'Authentification failed. Please contact support.'})(res)
+    }else{
+      jsonResponse(200,{status:"Good",detail: 'Authentification validated.'})(res)
+    }
   });
 
-  // second route, we post a file to an folder on this server
+  // third route, to post a file
   app.post('/api/uploadFile/interventions/:dpt', (req, res) => {
+    const accessToken = req.headers['x-access-token'] || false;  //important car si process.env.accessToken === undefined, faut pas une egalite
+    if (accessToken !== process.env.accessToken) {
+      jsonResponse(400,{status:"Error",detail: 'Authentification failed. Please contact support.'})(res)
+    }
 
     const dpt = (req.params.dpt) ? req.params.dpt : false
     const authorizedDepartment = ['91']
@@ -22,26 +35,7 @@ module.exports = function(app) {
         newName:'interventions_update_'+new Date().getDate()+'-'+new Date().getMonth()+'-'+new Date().getFullYear()
       })
     }else {
-      jsonResponse(200,{status:"Error",detail: 'Sorry, but the department '+ dpt +' is not yet available'})(res)
+      jsonResponse(400,{status:"Error",detail: 'Sorry, but the department '+ dpt +' is not yet available'})(res)
     }
-
   });
-
-  // a route to read a note
-  app.get('/api/uploadedFiles/:id', (req, res) => {
-    db.collection('notes').findOne({_id: new ObjectID(req.params.id) }, (err, doc) => {
-      if (err){
-        res.send({'error': 'An error has occurred' });
-      }else{
-        res.send(doc)
-      }
-    })
-  });
-
-  // and another one to delete it
-  app.delete('/api/uploadedFiles/:id', (req, res) => {
-      res.send('nothinig was since it isnot paramatered yet deleted!');
-  });
-
-
 };

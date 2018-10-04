@@ -22,6 +22,7 @@ services:
       - conf=/${APP}/conf
       - APP=${APP}
       - debugMode=${debugMode}
+      - accessToken=${accessToken}
 
     restart: always
 

@@ -25,7 +25,7 @@ include ./artifacts
 DC := 'docker-compose'
 
 docker-clean: stop
-	docker container rm ${APP}-build-front ${APP}-nginx
+	docker container rm ${APP}-build-front
 
 network-stop:
 	@echo cleaning ${APP} docker network
@@ -49,3 +49,5 @@ dev-log:
 dev: network backend
 
 stop: backend-stop network-stop
+
+restart: backend-stop network-stop network backend
