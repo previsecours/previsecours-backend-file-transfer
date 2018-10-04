@@ -1,7 +1,7 @@
 # Minimalist Starter kit for **NodeJS** API, with Free MongoDB Hosting
 
 ### Prerequisite:
-1. You need to have dokcer install  
+1. You need to have docker installed  
 
 2. You need to create a file named artifacts at the root of the project (same level as the Makefile) and inside you need to write your accessToken like this:  
 ```javascript
