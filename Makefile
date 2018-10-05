@@ -48,8 +48,8 @@ backend-log:
 dev-log:
 	${DC} -f ${DC_PREFIX}-backend.yml logs
 
-dev: network backend
+up: network backend
 
-stop: backend-stop network-stop
+down: backend-stop network-stop
 
 restart: backend-stop network-stop network backend
