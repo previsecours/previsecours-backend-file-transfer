@@ -16,7 +16,7 @@ services:
       - ${BACKEND}/log:/log/
       - ${BACKEND}/upload:/upload/
     ports:
-      - 8081:3000
+      - ${PORT}:3000
     environment:
       - UPLOAD_FOLDER=${BACKEND_UPLOAD_FOLDER}
       - conf=/${APP}/conf

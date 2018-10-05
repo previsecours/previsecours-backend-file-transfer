@@ -13,7 +13,4 @@ RUN mkdir -p /log $app_path/upload
 
 COPY . $app_path/.
 
-
-EXPOSE 8081
-
 CMD ["npm","run","dev"]
