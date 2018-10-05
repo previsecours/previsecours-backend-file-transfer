@@ -15,6 +15,8 @@ export BACKEND_UPLOAD_FOLDER=/upload
 export DC_DIR=${APP_PATH}
 export DC_PREFIX=${DC_DIR}/docker-compose
 export debugMode=false
+# please note that you must absolutely change this token for security reasons. Overload this value in the 'artifacts' file
+export accessToken=Y0Umust4bsolut3lyCh4NGM3
 
 date                := $(shell date -I)
 id                  := $(shell cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
