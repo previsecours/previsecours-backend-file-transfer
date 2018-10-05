@@ -6,7 +6,7 @@
 ##############################################
 
 
-export PORT=80
+export PORT=8081
 export APP=previsecours
 export COMPOSE_PROJECT_NAME=${APP}
 export APP_PATH := $(shell pwd)
