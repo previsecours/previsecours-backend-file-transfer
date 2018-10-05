@@ -48,6 +48,22 @@ backend-log:
 dev-log:
 	${DC} -f ${DC_PREFIX}-backend.yml logs
 
+
+status:
+	curl -s --noproxy "*" -XGET http://localhost:${PORT}/api/status | jq '.'
+sleep:
+	@sleep 1
+
+test:
+	@echo "testing api" | tee test.txt 
+	@curl -v -s --noproxy "*" -XPOST \
+  		http://localhost:${PORT}/api/uploadFile/interventions/91 \
+  		-H 'Cache-Control: no-cache' \
+ 		-H 'Content-type: multipart/form-data;' \
+  		-H 'x-access-token: ${accessToken}' \
+  		-F file=@`pwd`/test.txt | jq '.'
+	@#diff test.txt backend/upload/test.txt
+	@rm test.txt
 up: network backend
 
 down: backend-stop network-stop
