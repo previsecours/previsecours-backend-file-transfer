@@ -55,13 +55,12 @@ sleep:
 	@sleep 1
 
 test:
-	@echo "testing api" | tee test.txt 
+	@echo "testing api" | tee test.txt
 	@curl -v -s --noproxy "*" -XPOST \
   		http://localhost:${PORT}/api/uploadFile/interventions/91 \
   		-H 'Cache-Control: no-cache' \
- 		-H 'Content-type: multipart/form-data;' \
   		-H 'x-access-token: ${accessToken}' \
-  		-F file=@`pwd`/test.txt | jq '.'
+  		-F file=@`pwd`/test.txt --progress-bar | jq '.'
 	@#diff test.txt backend/upload/test.txt
 	@rm test.txt
 up: network backend
