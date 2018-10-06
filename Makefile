@@ -61,8 +61,8 @@ test:
   		-H 'Cache-Control: no-cache' \
   		-H 'x-access-token: ${accessToken}' \
   		-F file=@`pwd`/test.txt --progress-bar | jq '.'
-	@#diff test.txt backend/upload/test.txt
-	@rm test.txt
+	@diff test.txt backend/upload/interventions_91_update_`date +%d-%m-%Y`.txt && echo "upload api is successfull"
+	@rm -f test.txt backend/upload/interventions_91_update_`date +%d-%m-%Y`.txt
 up: network backend
 
 down: backend-stop network-stop
