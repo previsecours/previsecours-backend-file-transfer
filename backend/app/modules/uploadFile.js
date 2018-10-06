@@ -16,6 +16,7 @@ const partHandler = config => part => {
   }
   var file = undefined;
   if (!part.filename) {
+    if (config.debugMode){ console.log('no file name so we skip'); }
     part.resume(); //skip this file because it has no name
   } else {
     let newName = part.filename
@@ -29,6 +30,7 @@ const partHandler = config => part => {
       console.log("End => Field:"+part.name+" / FileName:"+newName)
     })
     part.on('error',err => {
+      if (config.debugMode){ console.log('err from the partHandler: ',err); }
       if (file){
         file.end();
       }
@@ -40,7 +42,7 @@ const partHandler = config => part => {
 let progress;
 
 const formClosedHandler = res => () => jsonResponse(200,{status:"Good",detail:"File was "+progress+"% uploaded"})(res)
-const formErrordHandler = res => () => jsonResponse(400,{status:"Error",detail:"File uploading encounterd an error at "+progress+"%"})(res)
+const formErrordHandler = res => (err) => jsonResponse(500,{status:"Error",detail:"File uploading encounterd an error at "+progress+"%",err:err})(res)
 const formProgressHandler = res => (bytesReceived, bytesExpected) => progress = Math.round(bytesReceived / bytesExpected * 100);
 
 const uploadFile = (req, res, config) => {
