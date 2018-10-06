@@ -32,7 +32,7 @@ module.exports = function(app) {
         uploadFolder: process.env.UPLOAD_FOLDER || './upload/',
         debugMode: JSON.parse(process.env.debugMode) || false,
         renameFile: true,
-        newName:'interventions_'+dpt.toString().trim()+'_update_'+new Date().getDate()+'-'+new Date().getMonth()+'-'+new Date().getFullYear()
+        newName:'interventions_'+dpt.toString().trim()+'_update_'+("0"+new Date().getDate()).slice(-2)+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+new Date().getFullYear()
       })
     }else {
       jsonResponse(400,{status:"Error",detail: 'Sorry, but the department '+ dpt +' is not yet available'})(res)
