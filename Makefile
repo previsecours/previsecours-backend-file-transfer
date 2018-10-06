@@ -67,4 +67,4 @@ up: network backend
 
 down: backend-stop network-stop
 
-restart: backend-stop network-stop network backend
+restart: backend-stop network-stop network backend sleep status
