@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation for the previsecours API",
+    "version": "1.0",
+    "title": "Previsecours Swagger",
+    "contact": {
+      "email": "guillaume.lancrenon@interieur.gouv.fr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "tags": [
+          "Main routes"
+        ],
+        "summary": "check the status of the API",
+        "description": "",
+        "operationId": "get_status",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AuthentificationStatus": {
+      "get": {
+        "tags": [
+          "Main routes"
+        ],
+        "summary": "check your API access Token",
+        "description": "",
+        "security": [
+          {
+            "accessToken": [
+            ]
+          }
+        ],
+        "operationId": "get_AuthentificationStatus",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization failed: ask for a proper token",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+      "/uploadFile/interventions/{dpt}": {
+      "post": {
+        "tags": [
+          "Main routes"
+        ],
+        "summary": "upload your interventions data using your API access Token",
+        "description": "",
+        "security": [
+          {
+            "accessToken": [
+            ]
+          }
+        ],
+        "operationId": "post_uploadFile_interventions",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "upfile",
+            "type": "file",
+            "description": "The file to upload: format should be CSV",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "dpt",
+            "type": "string",
+            "description": "Which department are you from ? for example: 91",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization failed: ask for a proper token",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema":{
+              "type": "object",
+              "properties":{
+                "status":{
+                  "type":	"string"
+                },
+                "detail":{
+                  "type":	"string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "accessToken": {
+      "type": "apiKey",
+      "name": "x-access-token",
+      "in": "header"
+    }
+  }
+}
