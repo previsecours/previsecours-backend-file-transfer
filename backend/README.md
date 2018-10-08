@@ -36,7 +36,6 @@ Example of a curl:
 curl -X POST \
   http://localhost:8081/api/uploadFile/interventions/91 \
   -H 'Cache-Control: no-cache' \
-  -H 'content-type: multipart/form-data;' \
   -H 'x-access-token: 7HyD5l%407GNWi%26U58Q5%24oejU2' \
   -F file=@/Users/Downloads/example.csv
 ```
