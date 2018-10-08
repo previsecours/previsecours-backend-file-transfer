@@ -28,8 +28,7 @@ Let's say you want to publish for the department 91
 1. Make sure you have the accessToken from the server admin.  
 2. Create a POST request to the API endpoint /api/uploadFile/interventions/91  
 3. Add a Header ``` x-access-token:<accessToken> ```  
-4. Add a Header ``` content-type: multipart/form-data ```  
-5. Add a File ``` file=<path-to-your-file>/interventions.csv ```  
+4. Add a File ``` file=<path-to-your-file>/interventions.csv ```  
 
 
 Example of a curl:  
