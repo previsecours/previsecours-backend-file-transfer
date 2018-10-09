@@ -40,4 +40,6 @@ curl -X POST \
   -F file=@/Users/Downloads/example.csv
 ```
 ## For more information
-There is a full documentation (done using swagger) accessible at the address http://localhost:8081/documentation/
+There is a full documentation (done using swagger) accessible at the address http://localhost:8081/documentation/  
+
+Note: https is prefered for testing online, but you can choose http for localhost
