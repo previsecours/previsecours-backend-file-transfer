@@ -14,7 +14,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongodb": "^2.2.16",
-    "multiparty": "^4.2.1"
+    "multiparty": "^4.2.1",
+    "swagger-ui-express": "4.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
